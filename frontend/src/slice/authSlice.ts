@@ -13,6 +13,7 @@ interface auUser {
 export interface AuthStateProps {
   user: User[];
   auUser: auUser[];
+  authenticated: boolean
   error: string;
   isLoading: boolean;
 }
@@ -20,6 +21,7 @@ export interface AuthStateProps {
 const initialState: AuthStateProps = {
   user: [],
   auUser: [],
+  authenticated: false,
   error: "",
   isLoading: false,
 };
@@ -34,6 +36,7 @@ export const AuthSlice = createSlice({
     registerUserSuccesss: (state, action) => {
       state.isLoading = false;
       state.user = action.payload;
+      state.authenticated= true
       localStorage.setItem("userInfo", JSON.stringify(action.payload));
     },
     registerUserFailure: (state, action) => {
@@ -47,6 +50,7 @@ export const AuthSlice = createSlice({
     loginUserSuccess: (state, action) => {
       state.isLoading = false;
       state.auUser = action.payload;
+      state.authenticated = true
       localStorage.setItem("userInfo", JSON.stringify(action.payload));
     },
     loginUserFailure: (state, action) => {
