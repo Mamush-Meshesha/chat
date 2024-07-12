@@ -1,8 +1,9 @@
 import { FC, FormEvent, useEffect, useState } from "react";
 import { FaRegMessage } from "react-icons/fa6";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { loginUserRequest, loginUserSuccess } from "../../slice/authSlice";
+import { RootState } from "../../store";
 
 interface LoginProps {}
 const LoginComp: FC<LoginProps> = () => {
@@ -15,19 +16,21 @@ const LoginComp: FC<LoginProps> = () => {
   const navigate = useNavigate()
   const { search } = useLocation()
   const sp = new URLSearchParams(search)
-  const redirect = sp.get("redirect") || "/"
+  const redirect = sp.get("redirect") || "/login"
   const submitInput = (e: { target: { name: string; value: string; }; }) => {
     setState({
       ...state,
       [e.target.name] : e.target.value
    })
   }
-  
+  const {authenticated} = useSelector((state: RootState) => state.auth)
    useEffect(() => {
-     const userInfo = localStorage.getItem("userInfo");
-     if (userInfo) {
-       dispatch(loginUserSuccess(JSON.parse(userInfo)));
+    
+     if (authenticated == true) {
+      
        navigate(redirect);
+     } else {
+       navigate("/login")
      }
    }, [dispatch,navigate,redirect]);
 

@@ -42,6 +42,7 @@ export const AuthSlice = createSlice({
     registerUserFailure: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+      state.authenticated= false
     },
 
     loginUserRequest: (state) => {
@@ -56,6 +57,7 @@ export const AuthSlice = createSlice({
     loginUserFailure: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+      state.authenticated= false
     },
     logoutUserRequest: (state) => {
       state.isLoading = true
