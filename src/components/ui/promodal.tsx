@@ -4,7 +4,8 @@ import { IoSettingsOutline } from "react-icons/io5";
 import Addmodal from "./addmodal";
 import { logoutUserRequest } from "../../slice/authSlice";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { persistor } from "../../store";
 
 
 interface ModalProps {
@@ -12,26 +13,26 @@ interface ModalProps {
 }
 
 const Modal: FC<ModalProps> = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+
     const [open, setIsOpen] = useState(false)
     
     const handleShow = () => {
         setIsOpen(!open)
     }
   
-    // const dispatch = useDispatch();
-    // const navigate = useNavigate();
-    // const { search } = useLocation();
-    // const sp = new URLSearchParams(search);
-    // const redirect = sp.get("redirect") || "/login";
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { search } = useLocation();
+    const sp = new URLSearchParams(search);
+    const redirect = sp.get("redirect") || "/login";
 
   
   
-    const logoutHandler = () => {
+    const logoutHandler =  () => {
       try {
         dispatch(logoutUserRequest());
-        navigate("/logout")
+      persistor.purge();
+        navigate(redirect)
       } catch (error) {
         console.log(error);
       }

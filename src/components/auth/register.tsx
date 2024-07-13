@@ -52,7 +52,7 @@ const RegisterComp: FC<RegisterProps> = () => {
   };
   return (
     <div className="bg-[#4EAC6D] min-h-screen p-10 overflow-hidden ">
-      <div className="flex justify-between gap-20">
+      <div className="md:flex md:justify-between gap-20">
         <div className="leading-10">
           <div className="flex gap-3">
             <FaRegMessage className="text-white text-3xl " />
@@ -61,7 +61,7 @@ const RegisterComp: FC<RegisterProps> = () => {
           <h1 className="capitalize text-[#9ED5B2] ">
             come and enjoy with friends
           </h1>
-          <div className="absolute bottom-0 pb-[6rem] pl-[20rem] ">
+          <div className="hidden md:flex absolute bottom-0 pb-[6rem] pl-[20rem] ">
             <img
               src="./Animation.gif"
               alt="gif"
@@ -69,8 +69,8 @@ const RegisterComp: FC<RegisterProps> = () => {
             />
           </div>
         </div>
-        <div className="bg-[#fff] w-[70%]  h-[91vh] rounded-2xl ">
-          <div className="flex items-center justify-center pt-[10rem]  ">
+        <div className="bg-[#fff] md:w-[70%]  md:h-[91vh] rounded-2xl py-10 md:py-0 ">
+          <div className="flex items-center justify-center md:pt-[10rem]   ">
             <div>
               <h1 className="text-3xl capitalize text-center ">
                 Create account
@@ -81,7 +81,7 @@ const RegisterComp: FC<RegisterProps> = () => {
             </div>
           </div>
           <div className="flex items-center justify-center  pt-10">
-            <form onSubmit={register} className="flex flex-col w-[40%] ">
+            <form onSubmit={register} className="flex flex-col md:w-[40%] ">
               <div className="pt-3 flex flex-col">
                 <label htmlFor="username">Email</label>
                 <input

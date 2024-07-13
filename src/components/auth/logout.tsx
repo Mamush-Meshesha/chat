@@ -11,7 +11,7 @@ const navigate = useNavigate()
 }
   return (
     <div className="bg-[#4EAC6D] min-h-screen p-10 overflow-hidden ">
-      <div className="flex justify-between gap-20">
+      <div className="md:flex md:justify-between gap-20">
         <div className="leading-10">
           <div className="flex gap-3">
             <FaRegMessage className="text-white text-3xl " />
@@ -20,7 +20,7 @@ const navigate = useNavigate()
           <h1 className="capitalize text-[#9ED5B2] ">
             come and enjoy with friends
           </h1>
-          <div className="absolute bottom-0 pb-[6rem] pl-[20rem] ">
+          <div className="hidden md:flex absolute bottom-0 pb-[6rem] pl-[20rem] ">
             <img
               src="./Animation.gif"
               alt="gif"
@@ -28,9 +28,9 @@ const navigate = useNavigate()
             />
           </div>
         </div>
-        <div className="bg-[#fff] w-[70%]  h-[91vh] rounded-2xl ">
+        <div className="bg-[#fff] md:w-[70%]  md:h-[91vh] rounded-2xl py-10 md:py-0 ">
           <div className="flex justify-center items-center h-full">
-            <div className="w-[40%] flex justify-center">
+            <div className="md:w-[40%] flex justify-center">
               <div>
                 <div className="w-[150px] h-[150px]  rounded-full bg-[#6c9b7c] opacity-80 flex justify-center items-center ">
                   <img
@@ -44,7 +44,10 @@ const navigate = useNavigate()
                   <p>We'll miss you 🥺🥺🥺</p>
                 </div>
                 <div className="pt-5">
-                  <button onClick={handleRedirect} className="bg-[#4EAC6D] text-center w-full h-11 rounded-md ">
+                  <button
+                    onClick={handleRedirect}
+                    className="bg-[#4EAC6D] text-center w-full h-11 rounded-md "
+                  >
                     Login
                   </button>
                 </div>

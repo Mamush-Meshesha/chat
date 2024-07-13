@@ -1,13 +1,20 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { FaPlus } from "react-icons/fa6";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { fetchUserRequest } from "../slice/userSlice";
+import { RootState } from "../store";
 
 interface ChatHeaderProps{
 
 }
 
 const ChatHeader: FC<ChatHeaderProps> = () => {
-
+  const dispatch = useDispatch()
+  const friends = useSelector((state:RootState) => state.user.user)
+  useEffect(() => {
+   dispatch(fetchUserRequest())
+},[dispatch])
     return (
       <div className="p-5">
         <div id="chat">
@@ -23,54 +30,26 @@ const ChatHeader: FC<ChatHeaderProps> = () => {
             />
           </div>
           <div className="py-11">
-            <div>
-              <h1 className="text-[#807E99]  ">latest chats</h1>
-              <div className="py-5 flex flex-col gap-5">
-                <NavLink
-                  to="/"
-                  className="flex gap-3 items-center active:bg-[#4EAC6D] h-11 px-3 rounded-md active:text-white  "
-                >
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVE13aD0sNpjODp_e3nB4SOUNWw2I_R6VpfoUfU4ZbRTIIZ2aq"
-                    alt=""
-                    className="w-7 h-7 rounded-full object-cover "
-                  />
-                  <h1 className="font-thin mb-0">Maria db</h1>
-                </NavLink>
-                <NavLink
-                  to="/"
-                  className="flex gap-3 items-center  active:bg-[#4EAC6D] h-11 px-3 rounded-md active:text-white "
-                >
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVE13aD0sNpjODp_e3nB4SOUNWw2I_R6VpfoUfU4ZbRTIIZ2aq"
-                    alt=""
-                    className="w-7 h-7 rounded-full object-cover "
-                  />
-                  <h1 className="font-thin">Maria db</h1>
-                </NavLink>
-                <NavLink
-                  to="/"
-                  className="flex gap-3 items-center active:bg-[#4EAC6D] h-11 px-3 rounded-md active:text-white  "
-                >
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVE13aD0sNpjODp_e3nB4SOUNWw2I_R6VpfoUfU4ZbRTIIZ2aq"
-                    alt=""
-                    className="w-7 h-7 rounded-full object-cover "
-                  />
-                  <h1 className="font-thin">Maria db</h1>
-                </NavLink>
-                <NavLink
-                  to="/"
-                  className="flex gap-3 items-center active:bg-[#4EAC6D] h-11 px-3 rounded-md active:text-white  "
-                >
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVE13aD0sNpjODp_e3nB4SOUNWw2I_R6VpfoUfU4ZbRTIIZ2aq"
-                    alt=""
-                    className="w-7 h-7 rounded-full object-cover "
-                  />
-                  <h1 className="font-thin">Maria db</h1>
-                </NavLink>
-              </div>
+             <div className="py-5 flex flex-col gap-5">
+              {friends && friends.length > 0 ?
+                friends.map((user, index) => (
+                  <div key={index}>
+                    <NavLink
+                      to="/"
+                      className="flex gap-3 items-center active:bg-[#4EAC6D] h-11 px-3 rounded-md active:text-white"
+                    >
+                      <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVE13aD0sNpjODp_e3nB4SOUNWw2I_R6VpfoUfU4ZbRTIIZ2aq"
+                        alt=""
+                        className="w-7 h-7 rounded-full object-cover"
+                      />
+                      <h1 className="font-thin mb-0">{user.name}</h1>
+                    </NavLink>
+                  </div> 
+                )
+                ): "No friends h"
+              }
+            </div>
               <div>
                 <h1 className="text-[#807E99]  ">favorite chats</h1>
                 <div className="pt-5">
@@ -90,7 +69,7 @@ const ChatHeader: FC<ChatHeaderProps> = () => {
             </div>
           </div>
         </div>
-      </div>
+    
     );
 }
 

@@ -5,7 +5,7 @@ interface ResetProps {}
 const ResetComp: FC<ResetProps> = () => {
   return (
     <div className="bg-[#4EAC6D] min-h-screen p-10 overflow-hidden ">
-      <div className="flex justify-between gap-20">
+      <div className="md:flex md:justify-between gap-20">
         <div className="leading-10">
           <div className="flex gap-3">
             <FaRegMessage className="text-white text-3xl " />
@@ -14,7 +14,7 @@ const ResetComp: FC<ResetProps> = () => {
           <h1 className="capitalize text-[#9ED5B2] ">
             come and enjoy with friends
           </h1>
-          <div className="absolute bottom-0 pb-[6rem] pl-[20rem] ">
+          <div className="hidden md:flex absolute bottom-0 pb-[6rem] pl-[20rem] ">
             <img
               src="./Animation.gif"
               alt="gif"
@@ -22,7 +22,7 @@ const ResetComp: FC<ResetProps> = () => {
             />
           </div>
         </div>
-        <div className="bg-[#fff] w-[70%]  h-[91vh] rounded-2xl ">
+        <div className="bg-[#fff] md:w-[70%]  md:h-[91vh] rounded-2xl py-10 md:py-0 ">
           <div className="flex items-center justify-center  h-full ">
             <div className="w-[100%]">
               <div className="flex items-center justify-center   ">
@@ -36,7 +36,7 @@ const ResetComp: FC<ResetProps> = () => {
                 </div>
               </div>
               <div className="flex items-center justify-center  pt-10">
-                <div className="flex flex-col w-[40%] ">
+                <div className="flex flex-col md:w-[40%] ">
                   <div className="pt-3 flex flex-col">
                     <label htmlFor="username">Email</label>
                     <input

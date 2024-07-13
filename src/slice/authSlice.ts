@@ -36,7 +36,7 @@ export const AuthSlice = createSlice({
     registerUserSuccesss: (state, action) => {
       state.isLoading = false;
       state.user = action.payload;
-      state.authenticated= true
+       localStorage.setItem("authenticate", JSON.stringify(true));
       localStorage.setItem("userInfo", JSON.stringify(action.payload));
     },
     registerUserFailure: (state, action) => {
@@ -51,8 +51,8 @@ export const AuthSlice = createSlice({
     loginUserSuccess: (state, action) => {
       state.isLoading = false;
       state.auUser = action.payload;
-      state.authenticated = true
-      localStorage.setItem("userInfo", JSON.stringify(action.payload));
+      state.authenticated = true;
+     
     },
     loginUserFailure: (state, action) => {
       state.isLoading = false;
@@ -65,7 +65,7 @@ export const AuthSlice = createSlice({
     logoutUseSuccess: (state) => {
       state.auUser = []
       state.isLoading = false
-      localStorage.removeItem("userInfo");
+      state.authenticated = false
 
     },
     logoutUserFailure: (state, action) => {

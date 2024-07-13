@@ -3,10 +3,15 @@ import { CgProfile } from "react-icons/cg";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { SiGnuprivacyguard } from "react-icons/si";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 interface ChatHeaderProps {}
 
 const SettingHeader: FC<ChatHeaderProps> = () => {
+
+  const { auUser } = useSelector((state: RootState) => state.auth)
+  
   return (
     <div className="" id="setting">
       <div>
@@ -24,7 +29,7 @@ const SettingHeader: FC<ChatHeaderProps> = () => {
         {/* name */}
         <div className="pt-20 flex justify-center border-b pb-10">
           <div>
-            <h1 className="text-2xl ">Mamush Meshesha</h1>
+            <h1 className="text-2xl ">{auUser.name}</h1>
             <div className="flex justify-center items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-[#66d65e] "></div>
               <span className="text-xs">Active</span>

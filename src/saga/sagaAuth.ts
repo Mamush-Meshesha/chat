@@ -3,6 +3,7 @@ import { call, all, takeLatest, put } from "redux-saga/effects"
 import { loginUserFailure, loginUserRequest, loginUserSuccess, logoutUserFailure, logoutUserRequest, registerUserFailure, registerUserRequest, registerUserSuccesss } from "../slice/authSlice";
 import axios, { AxiosResponse } from "axios";
 import {PayloadAction}  from "@reduxjs/toolkit"
+import { fetchUserFailure, fetchUserRequest, fetchUserSuccess } from "../slice/userSlice";
 function* registerUser(action: PayloadAction) {
     try {
         const res: AxiosResponse = yield call(axios.post, "http://localhost:5300/api/users/", action.payload, {
@@ -49,6 +50,22 @@ function* logoutUser() {
     }
 }
 
+function* fetchFriends() {
+    try {
+        const res: AxiosResponse = yield call(
+          axios.get,
+          "http://localhost:5300/api/users/get-friends",
+          {
+            withCredentials: true,
+          }
+        );
+        yield put(fetchUserSuccess(res.data))
+        
+    } catch (error: any) {
+        yield put(fetchUserFailure(error.message))
+    }
+}
+
 function* watchRegisterUser() {
     yield takeLatest(registerUserRequest.type, registerUser)
 }
@@ -61,12 +78,16 @@ function* watchLogoutUser() {
     yield takeLatest(logoutUserRequest.type, logoutUser)
 }
 
+function* watchFetchFriends() {
+    yield takeLatest(fetchUserRequest.type, fetchFriends)
+}
 
 // root saga
 export default function* rootSaga() { 
     yield all([
         watchRegisterUser(),
         watchLoginUser(),
-        watchLogoutUser()
+        watchLogoutUser(),
+        watchFetchFriends(),
     ])
 }
